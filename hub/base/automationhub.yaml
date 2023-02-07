@@ -4,8 +4,8 @@ metadata:
   name: hub
 spec:
   nginx_proxy_send_timeout: 120s
-  gunicorn_content_workers: 1
-  gunicorn_api_workers: 1
+  gunicorn_content_workers: 2
+  gunicorn_api_workers: 2
   route_tls_termination_mechanism: Edge
   ingress_type: Route
   loadbalancer_port: 80
@@ -22,7 +22,7 @@ spec:
   file_storage_access_mode: ReadWriteOnce
   content:
     log_level: INFO
-    replicas: 1
+    replicas: 2
   postgres_storage_requirements:
     limits:
       storage: 50Gi
@@ -45,4 +45,4 @@ spec:
   resource_manager:
     replicas: 1
   worker:
-    replicas: 1
+    replicas: 2
