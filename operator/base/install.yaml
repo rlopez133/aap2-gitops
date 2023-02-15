@@ -15,13 +15,24 @@ spec:
   targetNamespaces:
 ---
 apiVersion: operators.coreos.com/v1alpha1
+kind: CatalogSource
+metadata:
+  name: aap-catalog-source
+  namespace: ansible-automation-platform
+spec:
+  sourceType: grpc
+  image: quay.io/gpte-devops-automation/olm_snapshot_redhat_catalog:v4.10_2023_01_30
+  displayName: "Ansible Automation Platform Catalogsource"
+  publisher: "Red Hat AgnosticD"
+---
+apiVersion: operators.coreos.com/v1alpha1
 kind: Subscription
 metadata:
   name: ansible-automation-platform
   namespace: ansible-automation-platform
 spec:
-  channel: stable-2.3-cluster-scoped
+  channel: stable-2.2-cluster-scoped
   installPlanApproval: Automatic
   name: ansible-automation-platform-operator
-  source: redhat-operators
-  sourceNamespace: openshift-marketplace
+  source: aap-catalog-source
+  sourceNamespace: ansible-automation-platform
